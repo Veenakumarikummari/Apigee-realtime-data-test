@@ -1,0 +1,31 @@
+{
+
+  "apps" : [ "CB_Policy_Automater" ],
+
+  "companies" : [ ],
+
+  "email" : Alexander.Nernberger@footlocker.com,
+
+  "developerId" : "c84f8392-9c6b-4988-97a7-e0d55af9f35a",
+
+  "firstName" : "Alexander",
+
+  "lastName" : "Nernberger",
+
+  "userName" : Alexander.Nernberger@footlocker.com,
+
+  "organizationName" : "footlocker-nonprod",
+
+  "status" : "active",
+
+  "attributes" : [ ],
+
+  "createdAt" : 1565726235673,
+
+  "createdBy" : steven.daddio@footlocker.com,
+
+  "lastModifiedAt" : 1565726235673,
+
+  "lastModifiedBy" : steven.daddio@footlocker.com
+
+}
