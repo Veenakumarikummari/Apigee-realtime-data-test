@@ -19,22 +19,55 @@ $email=$requestPayload.email
 $FirstName=$requestPayload.firstName
 $LastName=$requestPayload.lastName
 $userName=$requestPayload.userName
-
-# Write-Host $requestPayload
-
-$json_template = @"
-{
-
-  "email" : "$($requestPayload.email.ToLower())",
-  "firstName" : "$($requestPayload.firstName)",
-  "lastName" : "$($requestPayload.lastName)",
-  "userName" : "$($requestPayload.userName)"
-}
-"@
-
-$reqPayload = $json_template
+if ($method -eq "POST") {
+            $json_template = @"{
+                    "email" : "$($requestPayload.email.ToLower())",
+                    "firstName" : "$($requestPayload.firstName)",
+                    "lastName" : "$($requestPayload.lastName)",
+                     "userName" : "$($requestPayload.userName)"
+                    }"@
+			$reqPayload = $json_template
+      Write-Host $reqPayload
+      $reqPayload = $json_template
 Write-Host $reqPayload
 $token = "$accessToken.substring(0, 471)"
 Invoke-WebRequest https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/developers -Method 'POST' -ContentType 'application/json; charset=utf-8' -Body $reqPayload -Headers $headers | Select-Object -Expand Content
 
+elseif ($method -eq "GET") {
+            $json_template = @"{
+                    "email" : "$($requestPayload.email.ToLower())",
+                    "firstName" : "$($requestPayload.firstName)",
+                    "lastName" : "$($requestPayload.lastName)",
+                     "userName" : "$($requestPayload.userName)"
+                    }"@
+			$reqPayload = $json_template
+            Write-Host $reqPayload
+            $token = "$accessToken.substring(0, 471)"
+			Invoke-WebRequest https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/developers -Method 'GET' -ContentType 'application/json; charset=utf-8' -Body $reqPayload -Headers $headers | Select-Object -Expand Content
+   }
+  elseif ($method -eq "PUT") {
+            $json_template = @"{
+                    "email" : "$($requestPayload.email.ToLower())",
+                    "firstName" : "$($requestPayload.firstName)",
+                    "lastName" : "$($requestPayload.lastName)",
+                     "userName" : "$($requestPayload.userName)"
+                    }"@
+			$reqPayload = $json_template
+            Write-Host $reqPayload
+            $token = "$accessToken.substring(0, 471)"
+			Invoke-WebRequest https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/developers -Method 'PUT' -ContentType 'application/json; charset=utf-8' -Body $reqPayload -Headers $headers | Select-Object -Expand Content
+        }
+  elseif ($method -eq "DELETE") {
+            $json_template = @"{
+                    "email" : "$($requestPayload.email.ToLower())"
+                    }"@
+			$reqPayload = $json_template
+            Write-Host $reqPayload
+            $token = "$accessToken.substring(0, 471)"
+			Invoke-WebRequest https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/developers -Method 'DELETE' -ContentType 'application/json; charset=utf-8' -Body $reqPayload -Headers $headers | Select-Object -Expand Content
+        } 
+  else {
+            Write-Host "Invalid method. Supported methods are POST, GET, PUT, DELETE."
+            } 
+}
 }
