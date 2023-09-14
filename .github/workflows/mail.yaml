@@ -5,25 +5,18 @@ name: Developers import in Apigee X
 on:
 
 #push:
-
-   workflow_dispatch:
+workflow_dispatch:
     inputs:
      deployment-org:
+     type: choice
+     description: Import to Org
+     default: "centering-river-396816"
+     options:
+       - centering-river-396816
+       - NA
 
-        type: choice
-
-        description: Import to Org
-
-        default: "centering-river-396816"
-
-        options:
-
-        - centering-river-396816
-
-        - NA
-
-        action-type:
-          type: choice
+     Action-type:
+          type: choic
           required : true
           description: Which action to perform ?
           default: "update"
