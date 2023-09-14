@@ -1,54 +1,48 @@
 name: Developers import in Apigee X
 
  
-
 on:
- workflow_dispatch:
-    inputs:
-     deployment-org:
-     type: choice
-     description: Import to Org
-     default: "centering-river-396816"
-     options:
-       - centering-river-396816
-       - NA
-
-     Action-type:
-          type: choice
-          required : true
-          description: Which action to perform ?
-          default: "update"
-          options:
-           - import
-           - create   
-           - update
-           - delete
-
-     developer-name:
-
-        type: string
-
-        required : false
-
-        description: Developer name on which action will be performed ?
-
-  
+    
+    workflow_dispatch:
+     inputs:
+      deployment-env:
+        type: choice
+        required: true
+        description: Environment to deploy
+        options:
+          - eval
+          - dev
+          - test
+          - uat
+          - stage
+          - prod
+      deployment-region:
+        type: choice
+        description: Region to deploy
+        options:
+          - esi-apigee-x-394004
+          - NA
+      deployment-config:
+        type: choice
+        description: Config inputs
+        options:
+          - keyvaluemaps
+          - flowhooks
+          - apiproducts
+          - developerapps
+          - developers
+          - importKeys
 
 jobs:
-
-  Apigee-X-Import-Developer:
+  apigee-config-build:
     runs-on: ubuntu-latest
     permissions:
-    contents: 'read'
-    id-token: 'write'
-   
+      contents: read
+      id-token: write
     steps:
-
-      - id: 'Checkout'
-
-        name: Code checkout
-
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - name: Set up JDK 1.11
+        uses: actions/setup-java@v3
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
